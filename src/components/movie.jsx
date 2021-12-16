@@ -3,8 +3,7 @@ import { getMovies } from "../service/fakeMovieService";
 import Like from "./Like";
 import Pagination from "./pagination";
 import { paginate } from "../utils/paginate";
-import Genre from "./genre";
-
+import ListGroup from "./listgroup";
 class Movies extends Component {
   state = {
     currentPage: 1,
@@ -41,7 +40,7 @@ class Movies extends Component {
       <>
         <div className="row">
           <div className="col-3">
-            <Genre />
+            <ListGroup />
           </div>
           <div className="col">
             <p className="alert alert-primary mt-3 p-2" role="alert">
