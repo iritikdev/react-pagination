@@ -1,2 +1,2 @@
-# react-pagination
+# movieflix
 Created with CodeSandbox
