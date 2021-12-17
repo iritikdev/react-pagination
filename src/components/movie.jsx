@@ -5,6 +5,7 @@ import Like from "./Like";
 import Pagination from "./pagination";
 import { paginate } from "../utils/paginate";
 import ListGroup from "./listgroup";
+import MoviesTable from "./moviesTable";
 class Movies extends Component {
   state = {
     movies: [],
@@ -41,6 +42,7 @@ class Movies extends Component {
   handleGenreSelect = (genre) => {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
+
   render() {
     let count = this.state.movies.length;
 
@@ -74,35 +76,11 @@ class Movies extends Component {
                 ? "There is no movies in database."
                 : `Showing ${filtered.length} movies in the database.`}
             </p>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">Title</th>
-                  <th scope="col">Genre</th>
-                  <th scope="col">Stock</th>
-                  <th scope="col">Rate</th>
-                </tr>
-              </thead>
-              <tbody>
-                {movies.map((movie) => (
-                  <tr key={movie._id}>
-                    <th>{movie.title}</th>
-                    <td>{movie.genre.name}</td>
-                    <td>{movie.numberInStock}</td>
-                    <td>{movie.dailyRentalRate}</td>
-                    <td>
-                      <Like
-                        liked={movie.liked}
-                        onClick={() => this.handleLike(movie)}
-                      />
-                    </td>
-                    <td onClick={() => this.handleDelete(movie)}>
-                      <ion-icon name="trash-outline"></ion-icon>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <MoviesTable
+              movies={movies}
+              onLike={this.handleLike}
+              onDelete={this.handleDelete}
+            />
             <Pagination
               itemsCount={filtered.length}
               pageSize={pageSize}
