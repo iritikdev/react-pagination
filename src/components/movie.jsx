@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import _ from "lodash";
 
 import ListGroup from "./listgroup";
+import NavBar from "./navBar";
 import Pagination from "./pagination";
 import MoviesTable from "./moviesTable";
 import { paginate } from "../utils/paginate";
 import { getGenres } from "../service/fakeGenreService";
 import { getMovies } from "../service/fakeMovieService";
+import { Route, Switch } from "react-router-dom";
 
 class Movies extends Component {
   state = {
@@ -49,14 +51,7 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-  handleSort = (path) => {
-    const sortColumn = { ...this.state.sortColumn };
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
+  handleSort = (sortColumn) => {
     this.setState({ sortColumn });
   };
 
@@ -97,6 +92,7 @@ class Movies extends Component {
             </p>
             <MoviesTable
               movies={movies}
+              sortColumn={sortColumn}
               onLike={this.handleLike}
               onDelete={this.handleDelete}
               onSort={this.handleSort}
